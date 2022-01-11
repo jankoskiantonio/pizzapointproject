@@ -1,6 +1,10 @@
 <?php 
     include("db_connect.php");
 	session_start();
+	if(!isset($_SERVER['HTTP_REFERER']) && !isset($_SESSION['cart'])){
+		header('refresh:0;index.php');
+		exit;
+	}
 ?>
 
 <!DOCTYPE html>
@@ -71,11 +75,19 @@
 	<!-- End header -->
 	
 	<!-- Start  -->
+    <?php
+	    if(isset($_GET['productID']))
+     	{
+        	$ID=$_GET['productID'];
+        	$query='select * from product where productID='.$ID;
+        	$result=mysqli_query($conn,$query);
+            $row=mysqli_fetch_object($result);
+        }	
+    ?>
 	<div class="all-page-title page-breadcrumb">
 		<div class="container text-center">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1>Gallery</h1>
 				</div>
 			</div>
 		</div>
@@ -88,42 +100,94 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="heading-title text-center">
-						<h2>Gallery</h2>
+                        <h2>Cart</h2>
 					</div>
 				</div>
 			</div>
 			<div class="tz-gallery">
 				<div class="row">
-					<div class="col-sm-12 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-01.jpg">
-							<img class="img-fluid" src="images/gallery-img-01.jpg" alt="Gallery Images">
-						</a>
-					</div>
-					<div class="col-sm-6 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-02.jpg">
-							<img class="img-fluid" src="images/gallery-img-02.jpg" alt="Gallery Images">
-						</a>
-					</div>
-					<div class="col-sm-6 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-03.jpg">
-							<img class="img-fluid" src="images/gallery-img-03.jpg" alt="Gallery Images">
-						</a>
-					</div>
-					<div class="col-sm-12 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-04.jpg">
-							<img class="img-fluid" src="images/gallery-img-04.jpg" alt="Gallery Images">
-						</a>
-					</div>
-					<div class="col-sm-6 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-05.jpg">
-							<img class="img-fluid" src="images/gallery-img-05.jpg" alt="Gallery Images">
-						</a>
-					</div> 
-					<div class="col-sm-6 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-06.jpg">
-							<img class="img-fluid" src="images/gallery-img-06.jpg" alt="Gallery Images">
-						</a>
-					</div>
+                    <div class="col-2"></div>
+                        <div class="col-10">
+                            <table class="col-12">
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                    <th>Options</th>
+                                </tr>
+                                <?php
+                                    $total=0;
+                                    $session=session_id();
+                                    $query="select * from orders, product where orders.sessionID='$session' and product.productID=orders.productID";
+                                    $result=mysqli_query($conn, $query);
+                                    while($row=mysqli_fetch_object($result)){
+                                        echo '
+                                        <tr>
+                                            <td>'.$row->productName.'</td>
+                                            <td>'.$row->quantity.'</td>
+                                            <td>'.$row->totalPrice.'</td>
+                                            <td><a href="removeitem.php?productID='.$row->productID.'">Remove</a></td>
+                                        </tr>
+                                        ';
+                                        $total=$total+$row->totalPrice;
+                                    }
+                                ?>
+                            </table>
+                            <br><br>
+							<div class="d-flex align-items-start">
+								<?php
+									$username=$_SESSION['user'];
+								
+									$query='select * from user where userName="'.$username.'"';
+                                    $result=mysqli_query($conn, $query);
+									while($row=mysqli_fetch_object($result)){
+										switch($row->userSubLevel){
+											case 0:
+												echo '<div class="col-4"><h3>Total Price: <strong>
+													'.$total.'
+													</strong></h3></div>
+													<div class="col-4"></div>
+													<div class="col-4">
+													<a class="btn" href="checkout.php">Checkout</a>
+													</div>';
+												break;
+											case 1:
+												echo '<div class="col-4"><h3>Total Price: <s>
+													'.$total.'
+													</s><strong>'.($total*0.9).'</strong></h3></div>
+													<div class="col-4"></div>
+													<div class="col-4">
+													<a class="btn" href="checkout.php">Checkout</a>
+													</div>';
+													$total=$total*0.9;
+												break;
+											case 2:
+												echo '<div class="col-4"><h3>Total Price: <s>
+													'.$total.'
+													</s><strong>'.($total*0.85).'</strong></h3></div>
+													<div class="col-4"></div>
+													<div class="col-4">;
+													<a class="btn" href="checkout.php">Checkout</a>
+													</div>';
+													$total=$total*0.85;
+												break;
+											case 3:
+												echo '<div class="col-4"><h3>Total Price: <s>
+													'.$total.'
+													</s><strong>'.($total*0.8).'</strong></h3></div>
+													<div class="col-4"></div>
+													<div class="col-4">
+													<a class="btn" href="checkout.php">Checkout</a>
+													</div>';
+													$total=$total*0.8;
+												break;
+										}
+									}
+									$_SESSION['orderPrice']=$total;
+								?>
+							</div>
+                        </div>
+                    </form>
 				</div>
 			</div>
 		</div>

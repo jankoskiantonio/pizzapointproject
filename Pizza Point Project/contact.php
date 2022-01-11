@@ -56,6 +56,9 @@
 							else{
 								echo '<li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>';
 							}
+							if(isset($_SESSION['cart'])){
+								echo '<li class="nav-item"><a class="nav-link" href="cart.php">Cart</a></li>';
+							}
                         ?>
 					</ul>
 				</div>

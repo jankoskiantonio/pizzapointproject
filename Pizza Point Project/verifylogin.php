@@ -15,15 +15,16 @@ $nr=mysqli_num_rows($result);
 
 if($nr==1)
 {
-    echo "You have been logged in";
     $_SESSION['user']=$u;
     $_SESSION['role']='1';
     header("refresh:1;url=index.php");
 }
 else
 {
-    echo "Go away. Wrong password or username";
-    header("refresh:2;url=login.php");
+    echo '<script>
+        alert("Login failed. Make sure to insert all credentials correctly or try again later");
+    </script>';
+    header("refresh:0;url=login.php");
 }
 
 ?>

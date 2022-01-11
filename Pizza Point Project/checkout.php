@@ -1,6 +1,10 @@
 <?php 
     include("db_connect.php");
 	session_start();
+	if(!isset($_SERVER['HTTP_REFERER']) && !isset($_SESSION['cart'])){
+		header('refresh:0;index.php');
+		exit;
+	}
 ?>
 
 <!DOCTYPE html>
@@ -71,11 +75,19 @@
 	<!-- End header -->
 	
 	<!-- Start  -->
+    <?php
+	    if(isset($_GET['productID']))
+     	{
+        	$ID=$_GET['productID'];
+        	$query='select * from product where productID='.$ID;
+        	$result=mysqli_query($conn,$query);
+            $row=mysqli_fetch_object($result);
+        }	
+    ?>
 	<div class="all-page-title page-breadcrumb">
 		<div class="container text-center">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1>Gallery</h1>
 				</div>
 			</div>
 		</div>
@@ -88,44 +100,52 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="heading-title text-center">
-						<h2>Gallery</h2>
+                        <h2>Checkout</h2>
 					</div>
 				</div>
 			</div>
-			<div class="tz-gallery">
+			
 				<div class="row">
-					<div class="col-sm-12 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-01.jpg">
-							<img class="img-fluid" src="images/gallery-img-01.jpg" alt="Gallery Images">
-						</a>
-					</div>
-					<div class="col-sm-6 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-02.jpg">
-							<img class="img-fluid" src="images/gallery-img-02.jpg" alt="Gallery Images">
-						</a>
-					</div>
-					<div class="col-sm-6 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-03.jpg">
-							<img class="img-fluid" src="images/gallery-img-03.jpg" alt="Gallery Images">
-						</a>
-					</div>
-					<div class="col-sm-12 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-04.jpg">
-							<img class="img-fluid" src="images/gallery-img-04.jpg" alt="Gallery Images">
-						</a>
-					</div>
-					<div class="col-sm-6 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-05.jpg">
-							<img class="img-fluid" src="images/gallery-img-05.jpg" alt="Gallery Images">
-						</a>
-					</div> 
-					<div class="col-sm-6 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-06.jpg">
-							<img class="img-fluid" src="images/gallery-img-06.jpg" alt="Gallery Images">
-						</a>
-					</div>
+                    <div class="col-2"></div>
+                    <div class="col-8">
+                    <form method="POST" action="finalizeorder.php">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+                                <h4><strong><label for="phone">Phone Number<label></strong></h4>
+									<input class="form-control" id="phone" type="text" name="phone" placeholder="Your Phone Number">
+								</div>                                 
+							</div>
+                            
+							<div class="col-md-12">
+                            <div class="form-group">
+                                <h4><strong><label for="address">Address<label></strong></h4>
+									<input class="form-control" id="address" type="text" name="address" placeholder="Your Address">
+								</div>  
+							</div>
+                            
+							<div class="col-md-12">
+                            <div class="form-group">
+                                <h4><strong><label for="city">City<label></strong></h4>
+									<input class="form-control" id="city" type="text" name="city" placeholder="Your City">
+								</div>  
+							</div>
+                            
+							<div class="col-md-12">
+                            <div class="form-group">
+                                <h4><strong><label for="zip">Area/ZIP code<label></strong></h4>
+									<input class="form-control" id="zip" type="number" name="zip" placeholder="Your Area Code(ZIP)">
+								</div>  
+								<div class="submit-button text-center">
+									<button class="btn btn-common" type="submit">Confirm Order</button>
+								</div>
+							</div>
+						</div>            
+					</form>
+                    </div>
+                    <div class="col-2"></div>
 				</div>
-			</div>
+			
 		</div>
 	</div>
 	<!-- End Gallery -->

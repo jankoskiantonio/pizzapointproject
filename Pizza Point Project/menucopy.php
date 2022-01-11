@@ -2,16 +2,13 @@
     include("db_connect.php");
 	session_start();
 ?>
-
 <!DOCTYPE html>
 <html lang="en"><!-- Basic -->
 <head>
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">   
    
-    
- 
-     
+     <!-- Site Metas -->
     <title>Pizza Point Delivery</title>  
     <meta name="keywords" content="">
     <meta name="description" content="">
@@ -30,8 +27,6 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/custom.css">
 
-    
-
 </head>
 
 <body>
@@ -48,7 +43,7 @@
 				<div class="collapse navbar-collapse" id="navbars-rs-food">
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
-						<li class="nav-item"><a class="nav-link" href="menu.php">Menu</a></li>
+						<li class="nav-item active"><a class="nav-link" href="menu.php">Menu</a></li>
 						<li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
 						<li class="nav-item"><a class="nav-link" href="gallery.php">Galery</a></li>
 						<li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
@@ -59,9 +54,6 @@
 							else{
 								echo '<li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>';
 							}
-							if(isset($_SESSION['cart'])){
-								echo '<li class="nav-item"><a class="nav-link" href="cart.php">Cart</a></li>';
-							}
                         ?>
 					</ul>
 				</div>
@@ -70,67 +62,115 @@
 	</header>
 	<!-- End header -->
 	
-	<!-- Start  -->
+	<!-- Start -->
 	<div class="all-page-title page-breadcrumb">
 		<div class="container text-center">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1>Gallery</h1>
+					<h1>Menu</h1>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- End -->
 	
-	<!-- Start Gallery -->
-	<div class="gallery-box">
+	<!-- Start Menu -->
+	<div class="menu-box">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="heading-title text-center">
-						<h2>Gallery</h2>
+						<h2>Menu</h2>
 					</div>
 				</div>
 			</div>
-			<div class="tz-gallery">
-				<div class="row">
-					<div class="col-sm-12 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-01.jpg">
-							<img class="img-fluid" src="images/gallery-img-01.jpg" alt="Gallery Images">
-						</a>
+			
+		<div class="row inner-menu-box">
+				<div class="col-3">
+					<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+					<?php
+                        $query="select distinct productCategory from product";
+                        $result=mysqli_query($conn,$query);
+						echo  '<a class="nav-link" href="menucopy.php?" aria-selected="true">All</a>';
+
+                        while($row=mysqli_fetch_object($result))
+                        {
+                            echo  '<a class="nav-link" href="menucopy.php?productCategory='.$row->productCategory.'" aria-selected="true">'.$row->productCategory.'</a>';
+				        }
+						
+                    ?>
+					
+					
+					
 					</div>
-					<div class="col-sm-6 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-02.jpg">
-							<img class="img-fluid" src="images/gallery-img-02.jpg" alt="Gallery Images">
-						</a>
-					</div>
-					<div class="col-sm-6 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-03.jpg">
-							<img class="img-fluid" src="images/gallery-img-03.jpg" alt="Gallery Images">
-						</a>
-					</div>
-					<div class="col-sm-12 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-04.jpg">
-							<img class="img-fluid" src="images/gallery-img-04.jpg" alt="Gallery Images">
-						</a>
-					</div>
-					<div class="col-sm-6 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-05.jpg">
-							<img class="img-fluid" src="images/gallery-img-05.jpg" alt="Gallery Images">
-						</a>
-					</div> 
-					<div class="col-sm-6 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-06.jpg">
-							<img class="img-fluid" src="images/gallery-img-06.jpg" alt="Gallery Images">
-						</a>
+				</div>
+				
+				
+				<div class="col-9">
+					<div class="tab-content" id="v-pills-tabContent">
+						<div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+							<div class="row">
+							<?php
+							if(isset($_GET['productCategory']))
+     							{
+        							$category=$_GET['productCategory'];
+        							$query='select * from product where productCategory="'.$category.'"';
+        							$result=mysqli_query($conn,$query);
+        							while($row=mysqli_fetch_object($result))
+									{
+										echo '<div class="col-lg-4 col-md-6 special-grid">
+											<div class="gallery-single fix">
+											<img src="images/'.$row->productPhoto.'" class="img-fluid" alt="Image">
+												<div class="why-text">
+												<h4>'.$row->productName.'</h4>
+												<p>'.$row->productDesc.'</p>
+												<h5>'.$row->productPrice.'</h5>
+											</div>
+										</div>
+									</div>';
+										
+							
+                             		}
+								}
+
+								if(!isset($_GET['productCategory']))
+     							{
+        							$query='select * from product';
+        							$result=mysqli_query($conn,$query);
+        							while($row=mysqli_fetch_object($result))
+									{
+										echo '<div class="col-lg-4 col-md-6 special-grid">
+											<div class="gallery-single fix">
+											<img src="images/'.$row->productPhoto.'" class="img-fluid" alt="Image">
+												<div class="why-text">
+												<h4>'.$row->productName.'</h4>
+												<p>'.$row->productDesc.'</p>
+												<h5>'.$row->productPrice.'</h5>
+											</div>
+										</div>
+									</div>';
+										
+							
+                             		}
+								}
+                			?>
+							</div>							
+						</div>
+						
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- End Gallery -->
+	<!-- End Menu -->
 	
-	<!--  Footer -->
+	
+
+	
+	
+<!--  Footer -->
 	<footer class="footer-area bg-f">
 		<div class="container">
 			<div class="row">
@@ -170,7 +210,7 @@
 		
 	</footer>
 	<!-- End Footer -->
-	
+		
 	<a href="#" id="back-to-top" title="Back to top" style="display: none;"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></a>
 
 	<!-- ALL JS FILES -->

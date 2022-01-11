@@ -5,19 +5,20 @@ include("db_connect.php");
 $u=$_POST['newname'];
 $p=$_POST['newpassword'];
 $e=$_POST['newemail'];
+$s=$_POST['sublevel'];
 
 $ep=md5($p);
 
-$query="INSERT INTO `user` (`userID`, `userName`, `userPassword`, `userEmail`, `userSubLevel`) VALUES (NULL, '$u', '$ep', '$e', '0');";
+$query="INSERT INTO `user` (`userID`, `userName`, `userPassword`, `userEmail`, `userSubLevel`) VALUES (NULL, '$u', '$ep', '$e', '$s');";
 
 if(mysqli_query($conn, $query))
 {
-    echo "Success";
-    header("refresh:10;url=login.php");
+    header("refresh:1;url=login.php");
 }
 else{
-    echo "Registration failed.";
-    header("refresh:10;url=register.php");
+    echo '<script>
+        alert("Registration failed. Make sure to insert all credentials correctly or try again later");
+    </script>';
 }
 
 

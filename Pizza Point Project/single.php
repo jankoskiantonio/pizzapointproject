@@ -71,11 +71,20 @@
 	<!-- End header -->
 	
 	<!-- Start  -->
+    <?php
+	    if(isset($_GET['productID']))
+     	{
+        	$ID=$_GET['productID'];
+        	$query='select * from product where productID='.$ID;
+        	$result=mysqli_query($conn,$query);
+            $row=mysqli_fetch_object($result);
+        }	
+    ?>
 	<div class="all-page-title page-breadcrumb">
 		<div class="container text-center">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1>Gallery</h1>
+					
 				</div>
 			</div>
 		</div>
@@ -88,42 +97,53 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="heading-title text-center">
-						<h2>Gallery</h2>
+                        <h2><?php echo $row->productName; ?></h2>
 					</div>
 				</div>
 			</div>
 			<div class="tz-gallery">
 				<div class="row">
-					<div class="col-sm-12 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-01.jpg">
-							<img class="img-fluid" src="images/gallery-img-01.jpg" alt="Gallery Images">
+                    <div class="col-1"></div>
+					<div class="col-5">
+						<a class="lightbox" href="images/<?php echo $row->productPhoto; ?>">
+							<img class="img-fluid" src="images/<?php echo $row->productPhoto; ?>" alt="Gallery Images">
 						</a>
-					</div>
-					<div class="col-sm-6 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-02.jpg">
-							<img class="img-fluid" src="images/gallery-img-02.jpg" alt="Gallery Images">
-						</a>
-					</div>
-					<div class="col-sm-6 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-03.jpg">
-							<img class="img-fluid" src="images/gallery-img-03.jpg" alt="Gallery Images">
-						</a>
-					</div>
-					<div class="col-sm-12 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-04.jpg">
-							<img class="img-fluid" src="images/gallery-img-04.jpg" alt="Gallery Images">
-						</a>
-					</div>
-					<div class="col-sm-6 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-05.jpg">
-							<img class="img-fluid" src="images/gallery-img-05.jpg" alt="Gallery Images">
-						</a>
-					</div> 
-					<div class="col-sm-6 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-06.jpg">
-							<img class="img-fluid" src="images/gallery-img-06.jpg" alt="Gallery Images">
-						</a>
-					</div>
+                    </div>
+                    <div class="col-5">
+                    <form method="POST" action="additem.php">
+                        <input type="hidden" name="productID" value="<?php echo $row->productID; ?>">
+						<input type="hidden" name="productPrice" value="<?php echo $row->productPrice; ?>">
+						<h3><strong>Description</strong></h3>
+                        <h4><?php echo $row->productDesc; ?></h4> <br>
+                        <h3><strong>Price</strong></h3>
+                        <h4><?php echo $row->productPrice; ?> den.</h4> <br>
+                        <?php
+						if(isset($_SESSION['user'])){
+							echo '<div class="d-flex align-items-start">
+                            <h3><strong>Quantity: </strong></h3>
+                            <select type="text" name="quantity">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+							</select>
+						</div>';
+						}
+						
+						?>
+						<?php
+							if(isset($_SESSION['user'])){
+								echo '<br><input type="submit" value="Add to cart"/>';
+							}
+							else{
+								echo '<br><h3><a href="login.php"><strong>Login</strong></a> to add items to cart.</h3>';
+							}
+						?>
+                        
+                    </div>
+                    <div class="col-1"></div>
+                    </form>
 				</div>
 			</div>
 		</div>

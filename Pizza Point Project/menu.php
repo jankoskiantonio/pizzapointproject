@@ -54,6 +54,9 @@
 							else{
 								echo '<li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>';
 							}
+							if(isset($_SESSION['cart'])){
+								echo '<li class="nav-item"><a class="nav-link" href="cart.php">Cart</a></li>';
+							}
                         ?>
 					</ul>
 				</div>
@@ -75,12 +78,20 @@
 	<!-- End -->
 	
 	<!-- Start Menu -->
+
 	<div class="menu-box">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="heading-title text-center">
-						<h2>Menu</h2>
+						<?php
+						if(isset($_GET['productCategory'])){
+							echo '<h2>Menu / '.$_GET['productCategory'].'</h2>';
+						}
+						if(!isset($_GET['productCategory'])){
+							echo '<h2>Menu / All</h2>';
+						}
+						?>
 					</div>
 				</div>
 			</div>
@@ -88,10 +99,20 @@
 		<div class="row inner-menu-box">
 				<div class="col-3">
 					<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-						<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">All</a>
-						<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Pizza</a>
-						<a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Pide/Lahmachun</</a>
-						<a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Drinks</a>
+					<?php
+                        $query="select distinct productCategory from product";
+                        $result=mysqli_query($conn,$query);
+						echo  '<a class="nav-link" href="menu.php?" aria-selected="true">All</a>';
+
+                        while($row=mysqli_fetch_object($result))
+                        {
+                            echo  '<a class="nav-link" href="menu.php?productCategory='.$row->productCategory.'" aria-selected="true">'.$row->productCategory.'</a>';
+				        }
+						
+                    ?>
+					
+					
+					
 					</div>
 				</div>
 				
@@ -99,372 +120,62 @@
 				<div class="col-9">
 					<div class="tab-content" id="v-pills-tabContent">
 						<div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-							<div class="row">								
-								<div class="col-lg-4 col-md-6 special-grid Безалкохолни пијалоци">									
-									<div class="gallery-single fix">
-										<img src="images/img-01.jpg" class="img-fluid" alt="Image">
-											<div class="why-text">
-											<h4>Pizza Margarita </h4>
-											<p>Tomato sauce / mozzarella cheese /yellow x`cheese</p>
-											<h5> 50/100/200/300</h5>
+							<div class="row">
+							<?php
+							if(isset($_GET['productCategory']))
+     							{
+        							$category=$_GET['productCategory'];
+        							$query='select * from product where productCategory="'.$category.'"';
+        							$result=mysqli_query($conn,$query);
+        							while($row=mysqli_fetch_object($result))
+									{
+										echo '<div class="col-lg-4 col-md-6 special-grid">
+											<div class="gallery-single fix">
+											<img src="images/'.$row->productPhoto.'" class="img-fluid" alt="Image">
+												<div class="why-text">
+												<h4>'.$row->productName.'</h4>
+												<p>'.$row->productDesc.'</p>
+												<div class="d-flex align-items-start">
+													<h5>'.$row->productPrice.' |</h5>
+													<h5><a class="text-white" href="single.php?productID='.$row->productID.'">| More</a></h5>
+												</div>
+												
+											</div>
 										</div>
-									</div>
-								</div>
-								
-								<div class="col-lg-4 col-md-6 special-grid drinks">
-									<div class="gallery-single fix">
-										<img src="images/img-03.jpg" class="img-fluid" alt="Image">
-										<div class="why-text">
-											<h4>Pizza Mix</h4>
-											<p>tomato sauce / mozzarella cheese /yellow cheese
-											 / Bosnian sausage / beef prosciutto / mushrooms</p>
-											<h5> 60/120/220/350</h5>
-										</div>
-									</div>
-								</div>
-								
-								<div class="col-lg-4 col-md-6 special-grid drinks">
-									<div class="gallery-single fix">
-										<img src="images/img-033.jpg" class="img-fluid" alt="Image">
-										<div class="why-text">
-											<h4>Pizza Salamino</h4>
-											<p>Tomato sauce / mozzarella cheese /yellow cheese / beef kulen</p>
-											<h5> 60/120/220/350</h5>
-										</div>
-									</div>
-								</div>
-								
-								<div class="col-lg-4 col-md-6 special-grid lunch">
-									<div class="gallery-single fix">
-										<img src="images/img-04.jpg" class="img-fluid" alt="Image">
-										<div class="why-text">
-											<h4>Pide/Pide Mix</h4>
-											<p>Pide with cheese/Pide mix</p>
-											<h5> 120/170</h5>
-										</div>
-									</div>
-								</div>
-								
-								<div class="col-lg-4 col-md-6 special-grid lunch">
-									<div class="gallery-single fix">
-										<img src="images/img-05.jpg" class="img-fluid" alt="Image">
-										<div class="why-text">
-											<h4>Lahmacun</h4>
-											<p>Minced meat, vegetables and herbs</p>
-											<h5> 100 den.</h5>
-										</div>
-									</div>
-								</div>
-								
-								<div class="col-lg-4 col-md-6 special-grid lunch">
-									<div class="gallery-single fix">
-										<img src="images/img-06.jpg" class="img-fluid" alt="Image">
-										<div class="why-text">
-											<h4>Pizza Oliva</h4>
-											<p>Pizza with olives</p>
-											<h5> 130den.</h5>
-										</div>
-									</div>
-								</div>
-								
-								<div class="col-lg-4 col-md-6 special-grid dinner">
-									<div class="gallery-single fix">
-										<img src="images/img-07.jpg" class="img-fluid" alt="Image">
-										<div class="why-text">
-											<h4>Pizza Vege</h4>
-											<p>Tomato sauce / mozzarella cheese /yellow cheese/zucchini/eggplant/olive/
-											peppers/spinach</p>
-											<h5> 60/120/220/350</h5>
-										</div>
-									</div>
-								</div>
-								
-								<div class="col-lg-4 col-md-6 special-grid dinner">
-									<div class="gallery-single fix">
-										<img src="images/img-023.jpg" class="img-fluid" alt="Image">
-										<div class="why-text">
-											<h4>Pizza zucchini</h4>
-											<p>Tomato sauce / mozzarella cheese /yellow cheese/zucchini</p>
-											<h5> 60/120/220/350</h5>
-										</div>
-									</div>
-								</div>
-								
-								<div class="col-lg-4 col-md-6 special-grid dinner">
-									<div class="gallery-single fix">
-										<img src="images/img-099.jpg" class="img-fluid" alt="Image">
-										<div class="why-text">
-											<h4>Pizza Tuna</h4>
-											<p>Pica tuna and onion</p>
-											<h5> 60/120/220/350</h5>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-4 col-md-6 special-grid drinks">
-									<div class="gallery-single fix">
-										<img src="images/img-10.jpg" class="img-fluid" alt="Image">
-										<div class="why-text">
-											<h4>Pizza Eggplant</h4>
-												<p>Tomato sauce/mozzarella cheese/yellow cheese/eggplant</p>
-												<h5> 70/140/240/370</h5>
-										</div>
-									</div>
-
-								</div>
-								<div class="col-lg-4 col-md-6 special-grid drinks">
-									<div class="gallery-single fix">
-										<img src="images/img-11.jpg" class="img-fluid" alt="Image">
-										<div class="why-text">
-											<h4>Pizza Speciale</h4>
-											<p>Tomato sauce/mozzarella cheese/yellow cheese/zucchini/tuna/fresh cheese/onion/garlic</p>
-												<h5> 70/140/240/370</h5>
-										</div>
-									</div>
-
-								</div>
-								<div class="col-lg-4 col-md-6 special-grid dinner">
-									<div class="gallery-single fix">
-										<img src="images/cocacola.jpg" class="img-fluid" alt="Image">
-										<div class="why-text">
-											<h4>Coca-Cola</h4>
-											<p>Coca-Cola</p>
-											<h5> 70den.</h5>
-										</div>
-									</div>
-								</div>
-								
-								<div class="col-lg-4 col-md-6 special-grid dinner">
-									<div class="gallery-single fix">
-										<img src="images/fanta.jpg" class="img-fluid" alt="Image">
-										<div class="why-text">
-											<h4>Fanta</h4>
-											<p>Orange/Shokata/Tropical</p>
-											<h5>70den.</h5>
-										</div>
-									</div>
-								</div>
-								
-								<div class="col-lg-4 col-md-6 special-grid dinner">
-									<div class="gallery-single fix">
-										<img src="images/sprite.jpg" class="img-fluid" alt="Image">
-										<div class="why-text">
-											<h4>Sprite</h4>
-											<p>Sprite</p>
-											<h5> 70den.</h5>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-4 col-md-6 special-grid dinner">
-									<div class="gallery-single fix">
-										<img src="images/bravo.jpg" class="img-fluid" alt="Image">
-										<div class="why-text">
-											<h4>Bravo</h4>
-											<p>Juice/Strawberry/Apple/Peach/Blueberry</p>
-											<h5> 70den.</h5>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-4 col-md-6 special-grid dinner">
-									<div class="gallery-single fix">
-										<img src="images/rosa.jpg" class="img-fluid" alt="Image">
-										<div class="why-text">
-											<h4>Rosa</h4>
-											<p>Water</p>
-											<h5> 50den.</h5>
-										</div>
-									</div>
-								</div>
+									</div>';
+										
 							
+                             		}
+								}
+
+								if(!isset($_GET['productCategory']))
+     							{
+        							$query='select * from product';
+        							$result=mysqli_query($conn,$query);
+        							while($row=mysqli_fetch_object($result))
+									{
+										echo '<div class="col-lg-4 col-md-6 special-grid">
+											<div class="gallery-single fix">
+											<img src="images/'.$row->productPhoto.'" class="img-fluid" alt="Image">
+												<div class="why-text">
+												<h4>'.$row->productName.'</h4>
+												<p>'.$row->productDesc.'</p>
+												<div class="d-flex align-items-start">
+													<h5>'.$row->productPrice.' |</h5>
+													<h5><a class="text-white" href="single.php?productID='.$row->productID.'">| More</a></h5>
+												</div>
+												
+											</div>
+										</div>
+									</div>';
+										
+							
+                             		}
+								}
+                			?>
 							</div>							
 						</div>
-						<div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-							<div class="row">
-								<div class="col-lg-4 col-md-6 special-grid drinks">
-									<div class="gallery-single fix">
-										<img src="images/img-01.jpg" class="img-fluid" alt="Image">
-											<div class="why-text">
-											<h4>Pizza Margarita </h4>
-											<p>Tomato sauce / mozzarella cheese /yellow cheese</p>
-											<h5> 50/100/200/300</h5>
-										</div>
-									</div>
-								</div>
-									<div class="col-lg-4 col-md-6 special-grid drinks">
-									<div class="gallery-single fix">
-										<img src="images/img-023.jpg" class="img-fluid" alt="Image">
-										<div class="why-text">
-											<h4>Pizza zucchini</h4>
-											<p>Tomato sauce / mozzarella cheese /yellow cheese/zucchini</p>
-											<h5> 60/120/220/350</h5>
-										</div>
-									</div>
-
-
-								</div>
-								<div class="col-lg-4 col-md-6 special-grid drinks">
-									<div class="gallery-single fix">
-										<img src="images/img-099.jpg" class="img-fluid" alt="Image">
-										<div class="why-text">
-											<h4>Pizza Tuna</h4>
-											<p>Pica tuna and onion</p>
-											<h5> 60/120/220/350</h5>
-										</div>
-									</div>
-										
-								</div>
-
-									<div class="col-lg-4 col-md-6 special-grid drinks">
-									<div class="gallery-single fix">
-										<img src="images/img-06.jpg" class="img-fluid" alt="Image">
-										<div class="why-text">
-											<h4>Pizza Oliva</h4>
-											<p>Pizza with olives</p>
-											<h5> 130den.</h5>
-										</div>
-									</div>
-								</div>
-									<div class="col-lg-4 col-md-6 special-grid drinks">
-									<div class="gallery-single fix">
-										<img src="images/img-07.jpg" class="img-fluid" alt="Image">
-										<div class="why-text">
-											<h4>Pizza Vege</h4>
-											<p>tomato sauce / mozzarella cheese /cheese/zucchini/eggplant/olive/
-											peppers/spinach</p>
-											<h5> 60/120/220/350</h5>
-										</div>
-									</div>
-								</div>
-								
-								<div class="col-lg-4 col-md-6 special-grid drinks">
-									<div class="gallery-single fix">
-										<img src="images/img-03.jpg" class="img-fluid" alt="Image">
-										<div class="why-text">
-											<h4>Pizza Mix</h4>
-											<p>tomato sauce / mozzarella cheese / cheese
-											 / Bosnian sausage / beef prosciutto / mushrooms</p>
-											<h5> 60/120/220/350</h5>
-										</div>
-									</div>
-								</div>
-								
-								<div class="col-lg-4 col-md-6 special-grid drinks">
-									<div class="gallery-single fix">
-										<img src="images/img-033.jpg" class="img-fluid" alt="Image">
-										<div class="why-text">
-											<h4>Pizza Salamino</h4>
-											<p>tomato sauce / mozzarella cheese /cheese / beef kulen</p>
-											<h5> 60/120/220/350</h5>
-										</div>
-									</div>
-
-								</div>
-								<div class="col-lg-4 col-md-6 special-grid drinks">
-									<div class="gallery-single fix">
-										<img src="images/img-10.jpg" class="img-fluid" alt="Image">
-										<div class="why-text">
-											<h4>Pizza Eggplant</h4>
-												<p>Tomato sauce/mozzarella cheese/yellow cheese/eggplant</p>
-												<h5> 70/140/240/370</h5>
-										</div>
-									</div>
-
-								</div>
-								<div class="col-lg-4 col-md-6 special-grid drinks">
-									<div class="gallery-single fix">
-										<img src="images/img-11.jpg" class="img-fluid" alt="Image">
-										<div class="why-text">
-											<h4>Pizza Speciale</h4>
-											<p>Tomato sauce/mozzarella cheese/yellow cheese/zucchini/tuna/fresh cheese/onion/garlic</p>
-												<h5> 70/140/240/370</h5>
-										</div>
-									</div>
-
-								</div>
-
-							</div>
-							
-						</div>
-						<div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-							<div class="row">
-								<div class="col-lg-4 col-md-6 special-grid lunch">
-									<div class="gallery-single fix">
-										<img src="images/img-04.jpg" class="img-fluid" alt="Image">
-										<div class="why-text">
-											<h4>Pide/Pide Mix</h4>
-											<p>Pide with cheese/Pide mix</p>
-											<h5> 120/170</h5>
-										</div>
-									</div>
-								</div>
-								
-								<div class="col-lg-4 col-md-6 special-grid lunch">
-									<div class="gallery-single fix">
-										<img src="images/img-05.jpg" class="img-fluid" alt="Image">
-										<div class="why-text">
-											<h4>Lahmacun</h4>
-											<p>Minced meat, vegetables and herbs</p>
-											<h5> 100</h5>
-										</div>
-									</div>
-								</div>
-								
-								
-							</div>
-						</div>
-						<div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
-							<div class="row">
-								<div class="col-lg-4 col-md-6 special-grid dinner">
-									<div class="gallery-single fix">
-										<img src="images/cocacola.jpg" class="img-fluid" alt="Image">
-										<div class="why-text">
-											<h4>Coca-Cola</h4>
-											<p>Coca-Cola</p>
-											<h5> 70den.</h5>
-										</div>
-									</div>
-								</div>
-								
-								<div class="col-lg-4 col-md-6 special-grid dinner">
-									<div class="gallery-single fix">
-										<img src="images/fanta.jpg" class="img-fluid" alt="Image">
-										<div class="why-text">
-											<h4>Fanta</h4>
-											<p>Orange/Shokata/Tropical</p>
-											<h5>70den.</h5>
-										</div>
-									</div>
-								</div>
-								
-								<div class="col-lg-4 col-md-6 special-grid dinner">
-									<div class="gallery-single fix">
-										<img src="images/sprite.jpg" class="img-fluid" alt="Image">
-										<div class="why-text">
-											<h4>Sprite</h4>
-											<p>Sprite</p>
-											<h5> 70den.</h5>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-4 col-md-6 special-grid dinner">
-									<div class="gallery-single fix">
-										<img src="images/bravo.jpg" class="img-fluid" alt="Image">
-										<div class="why-text">
-											<h4>Bravo</h4>
-											<p>Juice/Strawberry/Apple/Peach/Blueberry</p>
-											<h5> 70den.</h5>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-4 col-md-6 special-grid dinner">
-									<div class="gallery-single fix">
-										<img src="images/rosa.jpg" class="img-fluid" alt="Image">
-										<div class="why-text">
-											<h4>Rosa</h4>
-											<p>Water</p>
-											<h5> 50den.</h5>
-										</div>
-									</div>
-								</div>
+						
 							</div>
 						</div>
 					</div>
