@@ -1,12 +1,8 @@
 <?php 
     include("db_connect.php");
 	session_start();
-	if(!isset($_SERVER['HTTP_REFERER']) && ($_SESSION['role']=='3')){
-		header('refresh:0;admin.php');
-		exit;
-	}
-	if(!isset($_SERVER['HTTP_REFERER']) && ($_SESSION['role']=='2')){
-		header('refresh:0;employee.php');
+	if(!isset($_SERVER['HTTP_REFERER']) && ($_SESSION['role']!='2')){
+		header('refresh:0;index.php');
 		exit;
 	}
 ?>
@@ -55,22 +51,8 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbars-rs-food">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
-						<li class="nav-item"><a class="nav-link" href="menu.php">Menu</a></li>
-						<li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
-						<li class="nav-item"><a class="nav-link" href="gallery.php">Galery</a></li>
-						<li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
-						<?php
-                            if(!isset($_SESSION['user'])){
-                                echo '<li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>';
-                            }
-							else{
-								echo '<li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>';
-							}
-							if(isset($_SESSION['cart'])){
-								echo '<li class="nav-item"><a class="nav-link" href="cart.php">Cart</a></li>';
-							}
-                        ?>
+						<li class="nav-item"><a class="nav-link" href="orders.php">Orders</a></li>
+                        <li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>
 					</ul>
 				</div>
 			</div>
@@ -79,11 +61,11 @@
 	<!-- End header -->
 	
 	<!-- Start  -->
+    
 	<div class="all-page-title page-breadcrumb">
 		<div class="container text-center">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1>Gallery</h1>
 				</div>
 			</div>
 		</div>
@@ -96,42 +78,22 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="heading-title text-center">
-						<h2>Gallery</h2>
+                        <h2>Welcome to Employee Panel</h2>
 					</div>
 				</div>
 			</div>
 			<div class="tz-gallery">
 				<div class="row">
-					<div class="col-sm-12 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-01.jpg">
-							<img class="img-fluid" src="images/gallery-img-01.jpg" alt="Gallery Images">
-						</a>
-					</div>
-					<div class="col-sm-6 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-02.jpg">
-							<img class="img-fluid" src="images/gallery-img-02.jpg" alt="Gallery Images">
-						</a>
-					</div>
-					<div class="col-sm-6 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-03.jpg">
-							<img class="img-fluid" src="images/gallery-img-03.jpg" alt="Gallery Images">
-						</a>
-					</div>
-					<div class="col-sm-12 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-04.jpg">
-							<img class="img-fluid" src="images/gallery-img-04.jpg" alt="Gallery Images">
-						</a>
-					</div>
-					<div class="col-sm-6 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-05.jpg">
-							<img class="img-fluid" src="images/gallery-img-05.jpg" alt="Gallery Images">
-						</a>
-					</div> 
-					<div class="col-sm-6 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-06.jpg">
-							<img class="img-fluid" src="images/gallery-img-06.jpg" alt="Gallery Images">
-						</a>
-					</div>
+                    <div class="col-2"></div>
+                        <div class="col-10">
+                            <table class="col-12">
+                                <tr>
+                                    <th><h2><a href="orders.php">View Current Orders</a></h2></th>
+                                </tr>
+                            </table>
+                            <br><br>
+                        </div>
+                    </form>
 				</div>
 			</div>
 		</div>

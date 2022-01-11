@@ -15,9 +15,31 @@ $nr=mysqli_num_rows($result);
 
 if($nr==1)
 {
-    $_SESSION['user']=$u;
-    $_SESSION['role']='1';
-    header("refresh:1;url=index.php");
+    $queryEmp="select * from employee";
+    $resultEmp=mysqli_query($conn, $queryEmp);
+    while($rowEmp=mysqli_fetch_object($resultEmp)){
+        if($u == $rowEmp->employeeName){
+            $_SESSION['user']=$u;
+            $_SESSION['role']='2';
+            header("refresh:1;url=employee.php");
+        }
+        else{
+            $queryAdmin="select * from admin";
+            $resultAdmin=mysqli_query($conn, $queryAdmin);
+             while($rowAdmin=mysqli_fetch_object($resultAdmin)){
+                if($u == $rowAdmin->adminName){
+                    $_SESSION['user']=$u;
+                    $_SESSION['role']='3';
+                    header("refresh:1;url=admin.php");
+                }
+                else{
+                    $_SESSION['user']=$u;
+                    $_SESSION['role']='1';
+                    header("refresh:1;url=index.php");
+                }
+             }
+        }
+    }
 }
 else
 {

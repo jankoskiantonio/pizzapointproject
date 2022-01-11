@@ -1,12 +1,8 @@
 <?php 
     include("db_connect.php");
 	session_start();
-	if(!isset($_SERVER['HTTP_REFERER']) && ($_SESSION['role']=='3')){
-		header('refresh:0;admin.php');
-		exit;
-	}
-	if(!isset($_SERVER['HTTP_REFERER']) && ($_SESSION['role']=='2')){
-		header('refresh:0;employee.php');
+	if(!isset($_SERVER['HTTP_REFERER']) && ($_SESSION['role']!='3')){
+		header('refresh:0;index.php');
 		exit;
 	}
 ?>
@@ -55,22 +51,7 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbars-rs-food">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
-						<li class="nav-item"><a class="nav-link" href="menu.php">Menu</a></li>
-						<li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
-						<li class="nav-item"><a class="nav-link" href="gallery.php">Galery</a></li>
-						<li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
-						<?php
-                            if(!isset($_SESSION['user'])){
-                                echo '<li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>';
-                            }
-							else{
-								echo '<li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>';
-							}
-							if(isset($_SESSION['cart'])){
-								echo '<li class="nav-item"><a class="nav-link" href="cart.php">Cart</a></li>';
-							}
-                        ?>
+						
 					</ul>
 				</div>
 			</div>
@@ -79,11 +60,35 @@
 	<!-- End header -->
 	
 	<!-- Start  -->
+    <header class="top-navbar">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<div class="container">
+				<a class="navbar-brand" href="index.html">
+					<img src="images/logo1.jpg" alt="" />
+				</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-rs-food" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+				  <span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbars-rs-food">
+					<ul class="navbar-nav ml-auto">
+                        <li class="nav-item"><a class="nav-link" href="admin.php">Admin</a></li>
+                        <li class="nav-item"><a class="nav-link" href="menuadmin.php">Menu</a></li>
+						<li class="nav-item"><a class="nav-link" href="employeeadmin.php">Employees</a></li>
+						<li class="nav-item"><a class="nav-link" href="orders.php">Orders</a></li>
+                        <li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<!-- End header -->
+	
+	<!-- Start  -->
+    
 	<div class="all-page-title page-breadcrumb">
 		<div class="container text-center">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1>Gallery</h1>
 				</div>
 			</div>
 		</div>
@@ -96,42 +101,44 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="heading-title text-center">
-						<h2>Gallery</h2>
+                        <h2>Employees Panel</h2>
 					</div>
 				</div>
 			</div>
 			<div class="tz-gallery">
-				<div class="row">
-					<div class="col-sm-12 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-01.jpg">
-							<img class="img-fluid" src="images/gallery-img-01.jpg" alt="Gallery Images">
-						</a>
-					</div>
-					<div class="col-sm-6 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-02.jpg">
-							<img class="img-fluid" src="images/gallery-img-02.jpg" alt="Gallery Images">
-						</a>
-					</div>
-					<div class="col-sm-6 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-03.jpg">
-							<img class="img-fluid" src="images/gallery-img-03.jpg" alt="Gallery Images">
-						</a>
-					</div>
-					<div class="col-sm-12 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-04.jpg">
-							<img class="img-fluid" src="images/gallery-img-04.jpg" alt="Gallery Images">
-						</a>
-					</div>
-					<div class="col-sm-6 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-05.jpg">
-							<img class="img-fluid" src="images/gallery-img-05.jpg" alt="Gallery Images">
-						</a>
-					</div> 
-					<div class="col-sm-6 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-06.jpg">
-							<img class="img-fluid" src="images/gallery-img-06.jpg" alt="Gallery Images">
-						</a>
-					</div>
+            <div class="row">
+                        <div class="col-12">
+                            <table class="col-12">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Category</th>
+                                    <th>Price</th>
+                                    <th>Photo name</th>
+                                    <th>Options</th>
+                                </tr>
+                                <?php
+                                    $query="select * from product";
+                                    $result=mysqli_query($conn, $query);
+                                    while($row=mysqli_fetch_object($result)){
+                                        echo '
+                                        <tr>
+                                            <td>'.$row->productID.'</td>
+                                            <td>'.$row->productName.'</td>
+                                            <td>'.$row->productDesc.'</td>
+                                            <td>'.$row->productCategory.'</td>
+                                            <td>'.$row->productPrice.'</td>
+                                            <td>'.$row->productPhoto.'</td>
+                                            <td><a href="removeproduct.php?productID='.$row->productID.'">Remove</a></td>
+                                        </tr>
+                                        ';
+                                    }
+                                ?>
+                            </table>
+                            <br><br>
+                        </div>
+                    </form>
 				</div>
 			</div>
 		</div>

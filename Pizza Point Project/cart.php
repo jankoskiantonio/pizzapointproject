@@ -1,7 +1,7 @@
 <?php 
     include("db_connect.php");
 	session_start();
-	if(!isset($_SERVER['HTTP_REFERER']) && !isset($_SESSION['cart'])){
+	if(!isset($_SERVER['HTTP_REFERER']) && !isset($_SESSION['cart']) && ($_SESSION['role']=='3' || $_$SESSION['role']=='2')){
 		header('refresh:0;index.php');
 		exit;
 	}

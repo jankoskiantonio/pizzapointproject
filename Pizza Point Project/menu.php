@@ -1,6 +1,14 @@
 <?php 
     include("db_connect.php");
 	session_start();
+	if(!isset($_SERVER['HTTP_REFERER']) && ($_SESSION['role']=='3')){
+		header('refresh:0;admin.php');
+		exit;
+	}
+	if(!isset($_SERVER['HTTP_REFERER']) && ($_SESSION['role']=='2')){
+		header('refresh:0;employee.php');
+		exit;
+	}
 ?>
 <!DOCTYPE html>
 <html lang="en"><!-- Basic -->
