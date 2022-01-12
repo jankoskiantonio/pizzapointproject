@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 11, 2022 at 11:07 PM
+-- Generation Time: Jan 12, 2022 at 04:12 PM
 -- Server version: 10.4.21-MariaDB
--- PHP Version: 8.0.12
+-- PHP Version: 7.4.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `pizzapoint`
 --
-CREATE DATABASE IF NOT EXISTS `pizzapoint` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `pizzapoint`;
 
 -- --------------------------------------------------------
 
@@ -60,7 +58,8 @@ CREATE TABLE `employee` (
 
 INSERT INTO `employee` (`employeeID`, `employeeName`, `employeeEmail`, `employeeHours`) VALUES
 (1, 'employee1', 'employee1@test.com', 20),
-(2, 'employee2', 'employee2@test.com', 25);
+(2, 'employee2', 'employee2@test.com', 25),
+(3, 'testemployee', 'test@employee.com', 5);
 
 -- --------------------------------------------------------
 
@@ -82,7 +81,10 @@ CREATE TABLE `orderlist` (
 --
 
 INSERT INTO `orderlist` (`orderID`, `orderText`, `orderDate`, `orderAddress`, `orderPrice`, `phone`) VALUES
-(1, ' 1x Pizza Margarita,  1x Pizza Mix,  1x Pizza Speciale', '2022-01-11 14:24:47', 'jna 12 gostivar 1230', '561', '75000000');
+(1, ' 1x Pizza Margarita,  1x Pizza Mix,  1x Pizza Speciale', '2022-01-11 14:24:47', 'jna 12 gostivar 1230', '561', '75000000'),
+(4, ' 1x Pizza Margarita,  1x Pizza Mix,  1x Pizza Speciale', '2022-01-12 14:41:02', 'balindoslka br147 Gostivar 1230', '660', '70244212'),
+(5, ' 3x Pizza Mix,  1x Pizza Salamino,  1x Pizza Eggplant,  1x Sprite,  5x Bravo', '2022-01-12 15:41:24', '12313212 123123 1231', '1540', '12313123'),
+(6, ' 1x Pizza Margarita', '2022-01-12 15:54:26', '123 123 123', '200', '123');
 
 -- --------------------------------------------------------
 
@@ -121,7 +123,7 @@ INSERT INTO `product` (`productID`, `productName`, `productDesc`, `productCatego
 (1, 'Pizza Margarita', 'Tomato sauce / mozzarella cheese /yellow x`cheese', 'Pizza', '200', 'img-01.jpg'),
 (2, 'Pizza Mix', 'tomato sauce / mozzarella cheese /yellow cheese / Bosnian sausage / beef prosciutto / mushrooms', 'Pizza', '220', 'gallery-img-06.jpg'),
 (3, 'Pizza Salamino', 'Tomato sauce / mozzarella cheese /yellow cheese / beef kulen', 'Pizza', '220', 'img-033.jpg'),
-(4, 'Pide / Pide Mix', 'Pide with cheese/Pide mix', 'Pide/Lahmachun', '120', 'img-04.jpg'),
+(4, 'Pide / Pide Mix', 'Pide with cheese/Pide mix', 'Pide', '120', 'img-04.jpg'),
 (5, 'Lahmacun', 'Minced meat, vegetables and herbs', 'Lahmachun', '100', 'img-05.jpg'),
 (6, 'Pizza Oliva', 'Pizza with olives', 'Pizza', '130', 'img-06.jpg'),
 (7, 'Pizza Vege', 'Tomato sauce / mozzarella cheese /yellow cheese/zucchini/eggplant/olive/ peppers/spinach', 'Pizza', '220', 'img-07.jpg'),
@@ -207,19 +209,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `employeeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `employeeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `orderlist`
 --
 ALTER TABLE `orderlist`
-  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `productID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `productID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `user`

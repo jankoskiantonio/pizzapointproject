@@ -46,7 +46,7 @@
 	<header class="top-navbar">
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<div class="container">
-				<a class="navbar-brand" href="index.html">
+				<a class="navbar-brand" href="#">
 					<img src="images/logo1.jpg" alt="" />
 				</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-rs-food" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,7 +57,7 @@
 						<li class="nav-item active"><a class="nav-link" href="index.php">Home</a></li>
 						<li class="nav-item"><a class="nav-link" href="menu.php">Menu</a></li>
 						<li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
-						<li class="nav-item"><a class="nav-link" href="gallery.php">Galery</a></li>
+						
 						<li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
 						<?php
                             if(!isset($_SESSION['user'])){
@@ -86,7 +86,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<h1 class="m-b-20"><strong>Welcome To <br>Pizza Point Delivery</strong></h1>
-							<p class="m-b-40">Pizza Point Delivery was opened on ...</p>
+							<p class="m-b-40"></p>
 						</div>
 					</div>
 				</div>
@@ -128,12 +128,10 @@
 				<div class="col-lg-6 col-md-6 col-sm-12 text-center">
 					<div class="inner-column">
 						<h1>Welcome to <span>Pizza Point Delivery</span></h1>
-						<h4>About us</h4>
-						<p>We started on.....................................
-						....................................</p>
-						<p>With the opening of our new restaurant we want to provide a 
-						peaceful ambience and delicious food to our guests.............
-					......................................</p>
+						
+						<p>The fastest delivery of the most delicious pizza in town,baked on wood ! 🍕🍕🍕🍕🍕<br>
+						Free delivery to your home or office.<br>
+						  Come,Try it,Taste the most delicious pizza in town .</p>
 						
 					</div>
 				</div>

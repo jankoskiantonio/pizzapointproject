@@ -39,7 +39,7 @@
 	<header class="top-navbar">
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<div class="container">
-				<a class="navbar-brand" href="index.html">
+				<a class="navbar-brand" href="#">
 					<img src="images/logo1.jpg" alt="" />
 				</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-rs-food" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
@@ -121,7 +121,7 @@
 						if(isset($_SESSION['user'])){
 							echo '<div class="d-flex align-items-start">
                             <h3><strong>Quantity: </strong></h3>
-                            <select type="text" name="quantity">
+                            <select class="form-select" aria-label="Default select example" name="quantity">
 								<option value="1">1</option>
 								<option value="2">2</option>
 								<option value="3">3</option>
@@ -134,7 +134,7 @@
 						?>
 						<?php
 							if(isset($_SESSION['user'])){
-								echo '<br><input type="submit" value="Add to cart"/>';
+								echo '<br><input class="btn btn-info" type="submit" value="Add to cart"/>';
 							}
 							else{
 								echo '<br><h3><a href="login.php"><strong>Login</strong></a> to add items to cart.</h3>';

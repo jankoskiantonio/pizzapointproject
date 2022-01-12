@@ -1,3 +1,5 @@
+<!-- Ova e Admin Panelot kade sto adminite ke mozam da brisat / dodavaat itemi vo menito, ke mozat da go gledaat vremeto na rabota na rabotnicite i momentalnite naracki -->
+
 <?php 
     include("db_connect.php");
 	session_start();
@@ -43,7 +45,7 @@
 	<header class="top-navbar">
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<div class="container">
-				<a class="navbar-brand" href="index.html">
+				<a class="navbar-brand" href="#">
 					<img src="images/logo1.jpg" alt="" />
 				</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-rs-food" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,7 +53,7 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbars-rs-food">
 					<ul class="navbar-nav ml-auto">
-                        <li class="nav-item"><a class="nav-link" href="admin.php">Home</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="admin.php">Admin</a></li>
                         <li class="nav-item"><a class="nav-link" href="menuadmin.php">Menu</a></li>
 						<li class="nav-item"><a class="nav-link" href="employeeadmin.php">Employees</a></li>
 						<li class="nav-item"><a class="nav-link" href="orders.php">Orders</a></li>
@@ -91,9 +93,9 @@
                         <div class="col-10">
                             <table class="col-12">
                                 <tr>
-                                    <th><h2><a href="employeeadmin.php">Manage Employees</a></h2></th>
-                                    <th><h2><a href="menuadmin.php">Manage Menu</a></h2></th>
-                                    <th><h2><a href="orders.php">View Current Orders</a></h2></th>
+                                    <th><h2><button class="btn btn-info"><a href="employeeadmin.php">Manage Employees</a></button></h2></th>
+                                    <th><h2><button class="btn btn-info"><a href="menuadmin.php">Manage Menu</a></button></h2></th>
+                                    <th><h2><button class="btn btn-info"><a href="orders.php">View Current Orders</a></button></h2></th>
                                 </tr>
                             </table>
                             <br><br>

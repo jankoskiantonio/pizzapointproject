@@ -42,7 +42,7 @@
 	<header class="top-navbar">
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<div class="container">
-				<a class="navbar-brand" href="index.html">
+				<a class="navbar-brand" href="#">
 					<img src="images/logo1.jpg" alt="" />
 				</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-rs-food" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,7 +53,6 @@
 						<li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
 						<li class="nav-item active"><a class="nav-link" href="menu.php">Menu</a></li>
 						<li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
-						<li class="nav-item"><a class="nav-link" href="gallery.php">Galery</a></li>
 						<li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
 						<?php
                             if(!isset($_SESSION['user'])){
@@ -106,7 +105,7 @@
 			
 		<div class="row inner-menu-box">
 				<div class="col-3">
-					<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+					<div class="nav flex-column nav-pills btn btn-light" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 					<?php
                         $query="select distinct productCategory from product";
                         $result=mysqli_query($conn,$query);
@@ -145,7 +144,7 @@
 												<p>'.$row->productDesc.'</p>
 												<div class="d-flex align-items-start">
 													<h5>'.$row->productPrice.' |</h5>
-													<h5><a class="text-white" href="single.php?productID='.$row->productID.'">| More</a></h5>
+													<h5><a class="text-white" href="single.php?productID='.$row->productID.'">| <img src="images/buy.png" alt="" /></a></h5>
 												</div>
 												
 											</div>
@@ -170,7 +169,7 @@
 												<p>'.$row->productDesc.'</p>
 												<div class="d-flex align-items-start">
 													<h5>'.$row->productPrice.' |</h5>
-													<h5><a class="text-white" href="single.php?productID='.$row->productID.'">| More</a></h5>
+													<h5><a class="text-white" href="single.php?productID='.$row->productID.'">| <img src="images/buy.png" alt="" /></a></h5>
 												</div>
 												
 											</div>

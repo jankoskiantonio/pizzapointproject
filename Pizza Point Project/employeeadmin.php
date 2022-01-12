@@ -63,7 +63,7 @@
     <header class="top-navbar">
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<div class="container">
-				<a class="navbar-brand" href="index.html">
+				<a class="navbar-brand" href="#">
 					<img src="images/logo1.jpg" alt="" />
 				</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-rs-food" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,7 +73,7 @@
 					<ul class="navbar-nav ml-auto">
                         <li class="nav-item"><a class="nav-link" href="admin.php">Admin</a></li>
                         <li class="nav-item"><a class="nav-link" href="menuadmin.php">Menu</a></li>
-						<li class="nav-item"><a class="nav-link" href="employeeadmin.php">Employees</a></li>
+						<li class="nav-item active"><a class="nav-link" href="employeeadmin.php">Employees</a></li>
 						<li class="nav-item"><a class="nav-link" href="orders.php">Orders</a></li>
 						<li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>
 					</ul>
@@ -109,7 +109,7 @@
             <div class="row">
                     <div class="col-2"></div>
                         <div class="col-10">
-                            <table class="col-12">
+                            <table class="table table-hover">
                                 <tr>
                                     <th>ID</th>
                                     <th>Name</th>

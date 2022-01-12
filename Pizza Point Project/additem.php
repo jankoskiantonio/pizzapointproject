@@ -1,3 +1,5 @@
+<!-- Delot kade sto dodavame item vo cart t.e vo naracki -->
+
 <?php
 session_start();
 include("db_connect.php");
