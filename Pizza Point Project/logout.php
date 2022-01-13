@@ -1,3 +1,4 @@
+<!--Skripta za logout, unistuvanje na sesija i praznenje na privremenata tabela za narachka-->
 <?php
 include("db_connect.php");
 session_start();

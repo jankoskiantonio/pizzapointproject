@@ -1,3 +1,5 @@
+<!-- Sprecuvanje na adminot i vraboteniot da vlezat tuka -->
+
 <?php 
     include("db_connect.php");
 	session_start();
@@ -43,7 +45,7 @@
 	<header class="top-navbar">
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<div class="container">
-				<a class="navbar-brand" href="index.html">
+				<a class="navbar-brand" href="#">
 					<img src="images/logo1.jpg" alt="" />
 				</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-rs-food" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,7 +56,6 @@
 						<li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
 						<li class="nav-item"><a class="nav-link" href="menu.php">Menu</a></li>
 						<li class="nav-item active"><a class="nav-link" href="about.php">About</a></li>
-						<li class="nav-item"><a class="nav-link" href="gallery.php">Gallery</a></li>
 						<li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
 						<?php
                             if(!isset($_SESSION['user'])){
@@ -94,8 +95,12 @@
 					<div class="inner-column">
 						<h1>Welcome To <span>Pizza Point Delivery</span></h1>
 						<h4>Little Story</h4>
-						<p>The fastest delivery of the most delicious pizza in town ! 🍕🍕🍕🍕🍕
-						   Call-us : 070-700-582!!!!!!!!!!!!!!!!!!!!!!!!!!!!	</p>
+						<p>Pizza Point Delivery is located in Gostivar.<br>
+							 Pizza Point Delivery is working in Pizza activities.<br>
+							  We are open every day from 10:00 to 00:00.<br>
+							  we offer you excellent quality and delicious pizza on wood.<br>
+							  Come and taste it!
+						   	</p>
 					</div>
 				</div>
 				<div class="col-lg-6 col-md-6">
@@ -103,8 +108,8 @@
 				</div>
 				<div class="col-md-12">
 					<div class="inner-pt">
-						<p>............................ </p>
-						<p>............................ </p>
+						<p> Call-us : 070-700-582</p>
+						
 					</div>
 				</div>
 			</div>

@@ -1,7 +1,10 @@
+<!-- Ova e delot na Cart kade sto odkako ke vnese korisnikot produkti vo kosnickata tie mu se prikazuvaat tuka so vkupnata cena i  isto taka ima moznost da izbrise nekoj pri sto
+potoa moze da odi CheckOut i da ja finalizira narackata -->
+
 <?php 
     include("db_connect.php");
 	session_start();
-	if(!isset($_SERVER['HTTP_REFERER']) && !isset($_SESSION['cart']) && ($_SESSION['role']=='3' || $_$SESSION['role']=='2')){
+	if(!isset($_SERVER['HTTP_REFERER']) && !isset($_SESSION['cart']) && ($_SESSION['role']=='3' || $_SESSION['role']=='2')){
 		header('refresh:0;index.php');
 		exit;
 	}
@@ -43,7 +46,7 @@
 	<header class="top-navbar">
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<div class="container">
-				<a class="navbar-brand" href="index.html">
+				<a class="navbar-brand" href="#">
 					<img src="images/logo1.jpg" alt="" />
 				</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-rs-food" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,6 +66,7 @@
 							else{
 								echo '<li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>';
 							}
+							//Ako korisnikot nema proizvod vo cart, nema pristap do ovaa strana
 							if(isset($_SESSION['cart'])){
 								echo '<li class="nav-item"><a class="nav-link" href="cart.php">Cart</a></li>';
 							}
@@ -108,7 +112,7 @@
 				<div class="row">
                     <div class="col-2"></div>
                         <div class="col-10">
-                            <table class="col-12">
+                            <table class="table table-hover">
                                 <tr>
                                     <th>Product Name</th>
                                     <th>Quantity</th>
@@ -126,7 +130,7 @@
                                             <td>'.$row->productName.'</td>
                                             <td>'.$row->quantity.'</td>
                                             <td>'.$row->totalPrice.'</td>
-                                            <td><a href="removeitem.php?productID='.$row->productID.'">Remove</a></td>
+                                            <td><a href="removeitem.php?productID='.$row->productID.'"><b>Remove</b></a></td>
                                         </tr>
                                         ';
                                         $total=$total+$row->totalPrice;
@@ -148,7 +152,7 @@
 													</strong></h3></div>
 													<div class="col-4"></div>
 													<div class="col-4">
-													<a class="btn" href="checkout.php">Checkout</a>
+													<a class="btn btn-dark" href="checkout.php">Checkout</a>
 													</div>';
 												break;
 											case 1:

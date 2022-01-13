@@ -1,4 +1,5 @@
-<?php 
+<!-- Sprechuvanje na korisnici so admin i employee role da vleguvaat vo stranata -->
+<?php
     include("db_connect.php");
 	session_start();
 	if(!isset($_SERVER['HTTP_REFERER']) && ($_SESSION['role']=='3')){
@@ -15,9 +16,62 @@
 <head>
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">   
-   
+	<link rel="icon" type="image/png" href="images/logo1.jpg"/>
 
- 
+
+	<!-- Skripta so AJAX request za prikazuvanje na vreme -->
+	<script type="text/javascript">
+function AjaxFunction()
+{
+var httpxml;
+try
+  {
+  // Firefox, Opera 8.0+, Safari
+  httpxml=new XMLHttpRequest();
+  }
+catch (e)
+  {
+  // Internet Explorer
+		  try
+   			 		{
+   				 httpxml=new ActiveXObject("Msxml2.XMLHTTP");
+    				}
+  			catch (e)
+    				{
+    			try
+      		{
+      		httpxml=new ActiveXObject("Microsoft.XMLHTTP");
+     		 }
+    			catch (e)
+      		{
+      		alert("Your browser does not support AJAX!");
+      		return false;
+      		}
+    		}
+  }
+function stateck() 
+    {
+    if(httpxml.readyState==4)
+      {
+document.getElementById("msg").innerHTML=httpxml.responseText;
+document.getElementById("msg").style.fontSize = "x-large";
+      }
+    }
+	var url="ajaxclockfetch.php";
+url=url+"?sid="+Math.random();
+httpxml.onreadystatechange=stateck;
+httpxml.open("GET",url,true);
+httpxml.send(null);
+tt=timer_function();
+  }
+
+///////////////////////////
+function timer_function(){
+var refresh=1000; // Refresh rate in milli seconds
+mytime=setTimeout('AjaxFunction();',refresh)
+}
+
+</script>
 
     <title>Pizza Point Delivery</title>  
     <meta name="keywords" content="">
@@ -46,9 +100,11 @@
 	<header class="top-navbar">
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<div class="container">
-				<a class="navbar-brand" href="index.html">
+				<a class="navbar-brand" href="#">
 					<img src="images/logo1.jpg" alt="" />
 				</a>
+				<div id="msg">
+					<input type=button value='Show Time' onclick="timer_function();"></div>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-rs-food" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
 				  <span class="navbar-toggler-icon"></span>
 				</button>
@@ -57,7 +113,7 @@
 						<li class="nav-item active"><a class="nav-link" href="index.php">Home</a></li>
 						<li class="nav-item"><a class="nav-link" href="menu.php">Menu</a></li>
 						<li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
-						<li class="nav-item"><a class="nav-link" href="gallery.php">Galery</a></li>
+						
 						<li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
 						<?php
                             if(!isset($_SESSION['user'])){
@@ -86,7 +142,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<h1 class="m-b-20"><strong>Welcome To <br>Pizza Point Delivery</strong></h1>
-							<p class="m-b-40">Pizza Point Delivery was opened on ...</p>
+							<p class="m-b-40"></p>
 						</div>
 					</div>
 				</div>
@@ -128,12 +184,10 @@
 				<div class="col-lg-6 col-md-6 col-sm-12 text-center">
 					<div class="inner-column">
 						<h1>Welcome to <span>Pizza Point Delivery</span></h1>
-						<h4>About us</h4>
-						<p>We started on.....................................
-						....................................</p>
-						<p>With the opening of our new restaurant we want to provide a 
-						peaceful ambience and delicious food to our guests.............
-					......................................</p>
+						
+						<p>The fastest delivery of the most delicious pizza in town,baked on wood ! 🍕🍕🍕🍕🍕<br>
+						Free delivery to your home or office.<br>
+						  Come,Try it,Taste the most delicious pizza in town .</p>
 						
 					</div>
 				</div>
@@ -151,7 +205,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="heading-title text-center">
-						<h2>Galery</h2>
+						<h2>Gallery</h2>
 					</div>
 				</div>
 			</div>

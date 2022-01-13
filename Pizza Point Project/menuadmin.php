@@ -1,3 +1,6 @@
+<!--Del od admin panelot za upravuvanje so vrabotenite-->
+
+
 <?php 
     include("db_connect.php");
 	session_start();
@@ -43,7 +46,7 @@
 	<header class="top-navbar">
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<div class="container">
-				<a class="navbar-brand" href="index.html">
+				<a class="navbar-brand" href="#">
 					<img src="images/logo1.jpg" alt="" />
 				</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-rs-food" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,7 +66,7 @@
     <header class="top-navbar">
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<div class="container">
-				<a class="navbar-brand" href="index.html">
+				<a class="navbar-brand" href="#">
 					<img src="images/logo1.jpg" alt="" />
 				</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-rs-food" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
@@ -72,7 +75,7 @@
 				<div class="collapse navbar-collapse" id="navbars-rs-food">
 					<ul class="navbar-nav ml-auto">
                         <li class="nav-item"><a class="nav-link" href="admin.php">Admin</a></li>
-                        <li class="nav-item"><a class="nav-link" href="menuadmin.php">Menu</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="menuadmin.php">Menu</a></li>
 						<li class="nav-item"><a class="nav-link" href="employeeadmin.php">Employees</a></li>
 						<li class="nav-item"><a class="nav-link" href="orders.php">Orders</a></li>
                         <li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>
@@ -101,22 +104,22 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="heading-title text-center">
-                        <h2>Employees Panel</h2>
+                        <h2>Menu Panel</h2>
 					</div>
 				</div>
 			</div>
 			<div class="tz-gallery">
             <div class="row">
                         <div class="col-12">
-                            <table class="col-12">
+                            <table class="table table-hover">
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Description</th>
-                                    <th>Category</th>
-                                    <th>Price</th>
-                                    <th>Photo name</th>
-                                    <th>Options</th>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Category</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Photo name</th>
+                                    <th scope="col">Options</th>
                                 </tr>
                                 <?php
                                     $query="select * from product";
@@ -137,6 +140,7 @@
                                 ?>
                             </table>
                             <br><br>
+							<a class="btn btn-dark" href="addmenuitem.php">Add Item</a>
                         </div>
                     </form>
 				</div>

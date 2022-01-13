@@ -1,3 +1,5 @@
+<!-- Tuka vekje se potvrduva isprakja narackata kaj vrabotenite :) -->
+
 <?php
 session_start();
 include("db_connect.php");
@@ -30,5 +32,6 @@ if(mysqli_query($conn,$query)){
 }
 else{
     echo '<script>alert("Something went wrong. Make sure your credentials are inserted correctly or try again later.");</script>';
+    header("refresh:0;url=checkout.php");
 }
 ?>

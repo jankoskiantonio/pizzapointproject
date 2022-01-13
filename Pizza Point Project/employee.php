@@ -1,3 +1,4 @@
+<!-- Ova e Employee panelot kade sto vrabotenite mozat da upravuvaat so momentalnite naracki -->
 <?php 
     include("db_connect.php");
 	session_start();
@@ -5,7 +6,7 @@
 		header('refresh:0;index.php');
 		exit;
 	}
-?>
+?> 
 
 <!DOCTYPE html>
 <html lang="en"><!-- Basic -->
@@ -43,7 +44,7 @@
 	<header class="top-navbar">
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<div class="container">
-				<a class="navbar-brand" href="index.html">
+				<a class="navbar-brand" href="#">
 					<img src="images/logo1.jpg" alt="" />
 				</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-rs-food" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,7 +89,7 @@
                         <div class="col-10">
                             <table class="col-12">
                                 <tr>
-                                    <th><h2><a href="orders.php">View Current Orders</a></h2></th>
+                                    <th><h2><a class="btn btn-info" href="orders.php">View Current Orders</a></h2></th>
                                 </tr>
                             </table>
                             <br><br>

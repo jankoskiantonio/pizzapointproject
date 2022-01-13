@@ -1,3 +1,5 @@
+<!-- Verifikacija na login forma i zadavanje na role za korisnikot. Proveruva dali userot e obicen user, employee ili admin -->
+
 <?php
 session_start();
 include("db_connect.php");

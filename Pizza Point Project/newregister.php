@@ -1,3 +1,5 @@
+<!--Skripta za vnesuvanje na novite podatoci za korisnik vo soodvetnata tabela vo databazata-->
+
 <?php
 session_start();
 include("db_connect.php");

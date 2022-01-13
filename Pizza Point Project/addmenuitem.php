@@ -1,19 +1,22 @@
-<!-- Strana za pregled na edinechen artikl i stavanje vo cart so zadadena kolicina -->
+<!--Strana za popolnuvanje formular za dodavanje na artikli-->
+
+<!--Sprecuvanje na vlez na sekoj sto ne e admin-->
 
 <?php 
     include("db_connect.php");
 	session_start();
+	if(!isset($_SERVER['HTTP_REFERER']) && ($_SESSION['role']!='3')){
+		header('refresh:0;index.php');
+		exit;
+	}
 ?>
-
 <!DOCTYPE html>
 <html lang="en"><!-- Basic -->
 <head>
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">   
-   
-    
  
-     
+     <!-- Site Metas -->
     <title>Pizza Point Delivery</title>  
     <meta name="keywords" content="">
     <meta name="description" content="">
@@ -32,7 +35,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/custom.css">
 
-    
+   
 
 </head>
 
@@ -48,23 +51,12 @@
 				  <span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbars-rs-food">
-					<ul class="navbar-nav ml-auto">
-						<li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
-						<li class="nav-item"><a class="nav-link" href="menu.php">Menu</a></li>
-						<li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
-						<li class="nav-item"><a class="nav-link" href="gallery.php">Galery</a></li>
-						<li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
-						<?php
-                            if(!isset($_SESSION['user'])){
-                                echo '<li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>';
-                            }
-							else{
-								echo '<li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>';
-							}
-							if(isset($_SESSION['cart'])){
-								echo '<li class="nav-item"><a class="nav-link" href="cart.php">Cart</a></li>';
-							}
-                        ?>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item"><a class="nav-link" href="admin.php">Admin</a></li>
+                        <li class="nav-item"><a class="nav-link" href="menuadmin.php">Menu</a></li>
+						<li class="nav-item"><a class="nav-link" href="employeeadmin.php">Employees</a></li>
+						<li class="nav-item"><a class="nav-link" href="orders.php">Orders</a></li>
+                        <li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>
 					</ul>
 				</div>
 			</div>
@@ -73,84 +65,81 @@
 	<!-- End header -->
 	
 	<!-- Start  -->
-    <?php
-	    if(isset($_GET['productID']))
-     	{
-        	$ID=$_GET['productID'];
-        	$query='select * from product where productID='.$ID;
-        	$result=mysqli_query($conn,$query);
-            $row=mysqli_fetch_object($result);
-        }	
-    ?>
 	<div class="all-page-title page-breadcrumb">
 		<div class="container text-center">
 			<div class="row">
 				<div class="col-lg-12">
-					
+					<h1>Add Employee</h1>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- End -->
+	<!-- End  -->
 	
-	<!-- Start Gallery -->
-	<div class="gallery-box">
+	<!-- Start Contact -->
+
+	
+	<div class="contact-box">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="heading-title text-center">
-                        <h2><?php echo $row->productName; ?></h2>
+		
 					</div>
 				</div>
 			</div>
-			<div class="tz-gallery">
-				<div class="row">
-                    <div class="col-1"></div>
-					<div class="col-5">
-						<a class="lightbox" href="images/<?php echo $row->productPhoto; ?>">
-							<img class="img-fluid" src="images/<?php echo $row->productPhoto; ?>" alt="Gallery Images">
-						</a>
-                    </div>
-                    <div class="col-5">
-                    <form method="POST" action="additem.php">
-                        <input type="hidden" name="productID" value="<?php echo $row->productID; ?>">
-						<input type="hidden" name="productPrice" value="<?php echo $row->productPrice; ?>">
-						<h3><strong>Description</strong></h3>
-                        <h4><?php echo $row->productDesc; ?></h4> <br>
-                        <h3><strong>Price</strong></h3>
-                        <h4><?php echo $row->productPrice; ?> den.</h4> <br>
-                        <?php
-						if(isset($_SESSION['user'])){
-							echo '<div class="d-flex align-items-start">
-                            <h3><strong>Quantity: </strong></h3>
-                            <select class="form-select" aria-label="Default select example" name="quantity">
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-								<option value="5">5</option>
-							</select>
-						</div>';
-						}
-						
-						?>
-						<?php
-							if(isset($_SESSION['user'])){
-								echo '<br><input class="btn btn-info" type="submit" value="Add to cart"/>';
-							}
-							else{
-								echo '<br><h3><a href="login.php"><strong>Login</strong></a> to add items to cart.</h3>';
-							}
-						?>
-                        
-                    </div>
-                    <div class="col-1"></div>
-                    </form>
+			<div class="row">
+				<div class="col-lg-12">
+                <form method="POST" action="newmenuitem.php">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+                                <h4><strong><label for="empname">Item name<label></strong></h4>
+									<input class="form-control" id="itemname" type="text" name="itemname" placeholder="Item name">
+								</div>                                 
+							</div>
+                            
+							<div class="col-md-12">
+                            <div class="form-group">
+                                <h4><strong><label for="itemcat">Category<label></strong></h4>
+									<input class="form-control" id="itemcat" type="text" name="itemcat" placeholder="Category">
+								</div>  
+							</div>
+                            
+							<div class="col-md-12">
+                            <div class="form-group">
+                                <h4><strong><label for="itemdesc">Description<label></strong></h4>
+									<textarea class="form-control" id="itemdesc" type="text" name="itemdesc" placeholder="Description"></textarea>
+								</div>  
+							</div>
+                            
+							<div class="col-md-12">
+                            <div class="form-group">
+                                <h4><strong><label for="itemprice">Price<label></strong></h4>
+									<input class="form-control" id="itemprice" type="number" name="itemprice" placeholder="Price">
+								</div> 
+								
+								<div class="col-md-12">
+                           		<div class="form-group">
+                                <h4><strong><label for="itemphoto">Photo Name<label></strong></h4>
+									<input class="form-control" id="itemphoto" type="text" name="itemphoto" placeholder="Photo name / Note: the image must be in the images folder and the image extension must be included for it to work">
+								</div>  
+								</div>
+
+								<div class="submit-button text-center">
+									<button class="btn btn-common" type="submit">Confirm</button>
+								</div>
+							</div>
+							</div>
+						</div>            
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- End Gallery -->
+	<!-- End Contact -->
+	
+	
 	
 	<!--  Footer -->
 	<footer class="footer-area bg-f">
@@ -200,12 +189,27 @@
 	<script src="js/popper.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
     <!-- ALL PLUGINS -->
+	
 	<script src="js/jquery.superslides.min.js"></script>
 	<script src="js/images-loded.min.js"></script>
 	<script src="js/isotope.min.js"></script>
 	<script src="js/baguetteBox.min.js"></script>
+	<script src="js/jquery.mapify.js"></script>
 	<script src="js/form-validator.min.js"></script>
     <script src="js/contact-form-script.js"></script>
     <script src="js/custom.js"></script>
+	<script>
+		$('.map-full').mapify({
+			points: [
+				{
+					lat: 40.7143528,
+					lng: -74.0059731,
+					marker: true,
+					title: 'Marker title',
+					infoWindow: 'Live Dinner Restaurant'
+				}
+			]
+		});	
+	</script>
 </body>
 </html>
