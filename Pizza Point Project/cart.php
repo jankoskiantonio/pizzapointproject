@@ -1,6 +1,14 @@
+<<<<<<< Updated upstream
 <!-- Ova e delot na Cart kade sto odkako ke vnese korisnikot produkti vo kosnickata tie mu se prikazuvaat tuka so vkupnata cena i  isto taka ima moznost da izbrise nekoj pri sto
 potoa moze da odi CheckOut i da ja finalizira narackata -->
 
+=======
+<!-- 
+	Ova e delot na Cart kade sto korisnikot moze da vidi tabela so izbranite produkti i nivnite ceni i iskalkulirana vkupnata suma, 
+	Isto taka ima moznost za brisenje na proizvodi od korpata. 
+	Za kraj korisnikot moze da odi na opcijata CheckOut i da ja finalizira narackata 
+-->
+>>>>>>> Stashed changes
 <?php 
     include("db_connect.php");
 	session_start();
@@ -15,10 +23,6 @@ potoa moze da odi CheckOut i da ja finalizira narackata -->
 <head>
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">   
-   
-    
- 
-     
     <title>Pizza Point Delivery</title>  
     <meta name="keywords" content="">
     <meta name="description" content="">
@@ -36,11 +40,7 @@ potoa moze da odi CheckOut i da ja finalizira narackata -->
     <link rel="stylesheet" href="css/responsive.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/custom.css">
-
-    
-
 </head>
-
 <body>
 	<!-- Start header -->
 	<header class="top-navbar">

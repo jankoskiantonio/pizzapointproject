@@ -7,7 +7,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
-<link rel="icon" type="image/png" href="login/images/icons/favicon.ico"/>
+	<link rel="icon" type="image/png" href="login/images/icons/favicon.ico"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="login/vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
@@ -28,6 +28,7 @@
 	<link rel="stylesheet" type="text/css" href="login/css/util.css">
 	<link rel="stylesheet" type="text/css" href="login/css/main.css">
 <!--===============================================================================================-->
+
 </head>
 <body>
 <header class="top-navbar">
@@ -78,15 +79,14 @@
 					</div>
 
 					<div class="wrap-input100 rs1 validate-input" data-validate="">
-					<select type="text" name="sublevel">
-    					<option value="" disabled selected>Select your subscription level</option>
-    					<option value="0">0</option>
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-					</select>
+						<select type="text" name="sublevel">
+							<option value="" disabled selected>Select your subscription level</option>
+							<option value="0">0</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+						</select>
 					</div>
-
 					<div class="container-login100-form-btn m-t-20">
                         <input class="login100-form-btn" type="submit" value="Register"/>
 					</div>

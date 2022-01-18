@@ -119,9 +119,6 @@
 				        }
 						
                     ?>
-					
-					
-					
 					</div>
 				</div>
 				
@@ -131,32 +128,36 @@
 						<div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
 							<div class="row">
 							<?php
-							if(isset($_GET['productCategory']))
-     							{
-        							$category=$_GET['productCategory'];
-        							$query='select * from product where productCategory="'.$category.'"';
-        							$result=mysqli_query($conn,$query);
-        							while($row=mysqli_fetch_object($result))
-									{
-										echo '<div class="col-lg-4 col-md-6 special-grid">
+							if (isset($_GET['productCategory']))
+							{
+								$category=$_GET['productCategory'];
+								$query='select * from product where productCategory="'.$category.'"';
+								$result=mysqli_query($conn,$query);
+								while ($row=mysqli_fetch_object($result))
+								{
+									echo '<div class="col-lg-4 col-md-6 special-grid">
 											<div class="gallery-single fix">
 											<img src="images/'.$row->productPhoto.'" class="img-fluid" alt="Image">
 												<div class="why-text">
 												<h4>'.$row->productName.'</h4>
 												<p>'.$row->productDesc.'</p>
 												<div class="d-flex align-items-start">
+<<<<<<< Updated upstream
 													<h5>'.$row->productPrice.' |</h5>
+=======
+													<h5>'.$row->productPrice.' Ден. |</h5>
+>>>>>>> Stashed changes
 													<h5><a class="text-white" href="single.php?productID='.$row->productID.'">| <img src="images/buy.png" alt="" /></a></h5>
 												</div>
 												
-											</div>
-										</div>
-									</div>';
-										
+													</div>
+												</div>
+											</div>';
 							
-                             		}
 								}
+							}
 
+<<<<<<< Updated upstream
 								if(!isset($_GET['productCategory']))
      							{
         							$query='select * from product';
@@ -175,12 +176,29 @@
 												</div>
 												
 											</div>
+=======
+							if(!isset($_GET['productCategory']))
+							{
+								$query='select * from product';
+								$result=mysqli_query($conn,$query);
+								while($row=mysqli_fetch_object($result))
+								{
+									echo '<div class="col-lg-4 col-md-6 special-grid">
+									<a class="text-white" href="single.php?productID='.$row->productID.'"> 
+										<div class="gallery-single fix">
+										<img src="images/'.$row->productPhoto.'" class="img-fluid" alt="Image">
+											<div class="why-text">
+											<h4>'.$row->productName.' - '.$row->productPrice.' ден. </h4>
+											<p>'.$row->productDesc.'</p>
+>>>>>>> Stashed changes
 										</div>
-									</div>';
-										
-							
-                             		}
+									</div>
+									</a>
+								</div>';
+									
+						
 								}
+							}
                 			?>
 							</div>							
 						</div>

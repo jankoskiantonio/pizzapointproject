@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <!-- Sprechuvanje na korisnici so admin i employee role da vleguvaat vo stranata -->
 <?php
     include("db_connect.php");
@@ -88,14 +89,12 @@ mytime=setTimeout('AjaxFunction();',refresh)
     <link rel="stylesheet" href="css/style.css">    
 
     <link rel="stylesheet" href="css/responsive.css">
+=======
+<?php
+include_once('header.php');
+>>>>>>> Stashed changes
 
-    <link rel="stylesheet" href="css/custom.css">
-
-    
-
-</head>
-
-<body>
+?>
 	<!-- Start header -->
 	<header class="top-navbar">
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">

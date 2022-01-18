@@ -5,7 +5,11 @@
 	if(!isset($_SERVER['HTTP_REFERER']) && ($_SESSION['role']!='2')){
 		header('refresh:0;index.php');
 		exit;
+<<<<<<< Updated upstream
 	}
+=======
+	
+>>>>>>> Stashed changes
 ?> 
 
 <!DOCTYPE html>
